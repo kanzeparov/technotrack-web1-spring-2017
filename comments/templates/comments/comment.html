@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2><a href={% url "posts:allblogs" %}>All blogs</a> </h2>
+    <b>{{ object.id }} POST</b><br/>
+    <p>{{ object.title }}</p>
+
+        <div>
+        {% for comment in object.comment_set.all %}
+                <i>Comments:{{ comment.title }}</i><br/>
+        {%  endfor %}
+        </div>
+{% endblock %}
