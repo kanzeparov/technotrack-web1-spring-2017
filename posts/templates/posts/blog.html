@@ -11,7 +11,7 @@
         {% for post in object.post_set.all %}
             <i>Post: text{{ post.text }}</i><br/>
             {%  for comment in post.comment_set.all %}
-                <i><a href={% url "posts:allcomments"  pk=post.id %}> Comments:</a>{{ comment.title }}</i><br/>
+                <i><a href={% url "posts:allcomments" pk=comment.id pk1=post.id%}> Comments:</a>{{ comment.title }}</i><br/>
             {% endfor %}
         {%  endfor %}
         </div>
