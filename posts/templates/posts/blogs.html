@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 {% block content %}
-    <h2><a href={% url "posts:mainpage" %}>Main page</a> </h2>
+    <h2><a href={% url "main:home" %}>Main page</a> </h2>
     {% for blog in object_list %}
-        <b>{{ blog.id }}</b><a href={% url "posts:oneblog" pk=blog.id %}>{{ blog.title }}</a><br/>
+        <b>{{ blog.id }}</b><a href={% url "blogs:oneblog" pk=blog.id %}>{{ blog.title }}</a><br/>
     {% endfor %}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href={% url "posts:allblogs" %}>All blogs</a> </h2>
+    <h2><a href={% url "blogs:allblogs" %}>All blogs</a> </h2>
     <b>{{ object.id }} BLOG</b><br/>
     <p>{{ object.title }}</p>
 
@@ -9,10 +9,11 @@
         <div>
         <h1>Posts</h1>
         {% for post in object.post_set.all %}
-            <i>Post: text{{ post.text }}</i><br/>
-            {%  for comment in post.comment_set.all %}
-                <i><a href={% url "posts:allcomments" pk=comment.id pk1=post.id%}> Comments:</a>{{ comment.title }}</i><br/>
-            {% endfor %}
+            <i><a href={% url "blogs:postview" pk=post.id%}>Post</a>: text{{ post.text }}</i><br/>
+            <div>{% if post.comment_set.all %}
+                {{ post.comment_set.all.last.title }}
+            {% endif %}
+            </div>
         {%  endfor %}
         </div>
     {% endif %}

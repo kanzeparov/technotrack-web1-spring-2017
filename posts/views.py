@@ -9,3 +9,7 @@ class BlogsList(ListView):
 class BlogView(DetailView):
     queryset = Blog.objects.all()
     template_name = 'posts/blog.html'
+
+class PostView(DetailView):
+    queryset = Blog.objects.all()
+    template_name = 'posts/post.html'

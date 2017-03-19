@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2><a href={% url "blogs:oneblog" pk=blog.id%}>Back</a> </h2>
+    <b>{{ object.id }} Post</b><br/>
+    <p>{{ object.title }}</p>
+
+        <div>
+        {% for comment in object.post_set.all %}
+                <i>Comments:{{ comment.title }}</i><br/>
+        {%  endfor %}
+        </div>
+{% endblock %}

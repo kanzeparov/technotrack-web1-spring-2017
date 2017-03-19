@@ -3,6 +3,15 @@ from django.shortcuts import render
 from posts.models import Post, Blog
 from comments.models import Comment
 
-def test(request):
+class HomePageView(TemplateView):
 
-    return render(request, 'core/home.html',{"count_blog": Blog.objects.all().count(),"count_post":Post.objects.all().count(), "count_comments":Comment.objects.all().count()})
+    template_name = "core/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context['blog_count'] = Blog.objects.all().count()
+        context['post_count'] = Post.objects.all().count()
+        context['comment_count'] = Comment.objects.all().count()
+        return context
+
+

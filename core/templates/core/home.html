@@ -2,12 +2,12 @@
 
     {% block content %}
         {% include "core/list.html" with values=posts %}
-        <div>Number of blogs - {{ count_blog|default:"no blogs"}}</div>
-        <div>Number of posts - {{ count_post|default:"no posts"}}</div>
-        <div>Number of comments - {{ count_comments|default:"no comments"}}</div>
-        <h2><a href={% url "posts:allblogs" %}>All blogs</a> </h2>
+        <div>Number of blogs - {{ blog_count|default:"no blogs"}}</div>
+        <div>Number of posts - {{ post_count|default:"no posts"}}</div>
+        <div>Number of comments - {{ comment_count|default:"no comments"}}</div>
+        <h2><a href={% url "blogs:allblogs" %}>All blogs</a> </h2>
 
 
     {% endblock %}
 
-    {% block title %}TITTLE!!{% endblock %}
+    {% block title %}Main page{% endblock %}
