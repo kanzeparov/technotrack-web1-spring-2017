@@ -3,5 +3,6 @@
     <h2><a href={% url "main:home" %}>Main page</a> </h2>
     {% for blog in object_list %}
         <b>{{ blog.id }}</b><a href={% url "blogs:oneblog" pk=blog.id %}>{{ blog.title }}</a><br/>
+        <i><div>Description: {{ blog.description }}</div></i>
     {% endfor %}
 {% endblock %}

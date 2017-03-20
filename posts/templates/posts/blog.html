@@ -2,16 +2,17 @@
 
 {% block content %}
     <h2><a href={% url "blogs:allblogs" %}>All blogs</a> </h2>
-    <b>{{ object.id }} BLOG</b><br/>
+    <h3><b>{{ object.id }} BLOG</b><br/></h3>
     <p>{{ object.title }}</p>
+    <i>Description: {{ object.description }}</i>
 
     {% if object.post_set.all %}
         <div>
         <h1>Posts</h1>
         {% for post in object.post_set.all %}
-            <i><a href={% url "blogs:postview" pk=post.id%}>Post</a>: text{{ post.text }}</i><br/>
+            <i><a href={% url "blogs:postview" pk=post.id%}>Post {{ post.id }}</a>: {{ post.title }}</i><br/>
             <div>{% if post.comment_set.all %}
-                {{ post.comment_set.all.last.title }}
+                Last comment: <i>{{ post.comment_set.all.last.title }}
             {% endif %}
             </div>
         {%  endfor %}
