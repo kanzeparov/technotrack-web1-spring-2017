@@ -13,3 +13,5 @@ class Comment(models.Model):
     post = models.ForeignKey(Post)
     rate = models.IntegerField(default=0)
 
+
+

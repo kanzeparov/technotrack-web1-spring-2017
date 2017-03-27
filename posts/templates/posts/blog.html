@@ -11,7 +11,6 @@
     <h3><a href="{% url "blogs:createpost" %}">Создать новый post</a></h3>
 
     {% if object.post_set.all %}
-        <>
         <h1>Posts</h1>
         {% for post in object.post_set.all %}
             <i><a href={% url "blogs:postview" pk=post.id%}>Post {{ post.id }}</a>: {{ post.title }}</i><br/>

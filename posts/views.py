@@ -7,13 +7,8 @@ from django.shortcuts import render
 from django.views.generic.edit import FormView
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
-
+from .models import Category
 from django.contrib.auth import get_user_model
-
-
-
-
-
 
 
 class CreateUser(CreateView):
@@ -31,17 +26,13 @@ class SortForm(forms.Form):
     ))
     search = forms.CharField(required=False)
 
-
-class Categories(models.Model):
-    title = forms.CharField(max_length=30)
-
 class UpdateBlog(UpdateView):
 
     template_name = 'posts/editblog.html'
     model = Blog
-    fields = ('title', 'description', 'categories')
+    fields = ('title', 'description', 'category')
     success_url = '/blogs/'
-    categories = models.ManyToManyField(Categories)
+    category = models.ManyToManyField(Category)
 
     def get_queryset(self):
         return super(UpdateBlog, self).get_queryset().filter(author=self.request.user)
@@ -58,18 +49,14 @@ class UpdatePost(UpdateView):
         return super(UpdatePost, self).get_queryset().filter(author=self.request.user)
 
 
-class BlogForm(forms.ModelForm):
-    class Meta:
-        model = Blog
-        fields = ('title','description','rate')
 
 
 
 class CreateBlog(CreateView):
-    categories = models.ManyToManyField(Categories)
+    category = models.ManyToManyField(Category)
     template_name = 'posts/addblog.html'
     model = Blog
-    fields = ('title', 'description','categories')
+    fields = ('title', 'description','category')
     success_url = '/blogs/'
 
     def form_valid(self, form):
@@ -78,16 +65,28 @@ class CreateBlog(CreateView):
         return super(CreateBlog, self).form_valid(form)
 
 
+class CreateCategory(CreateView):
+    template_name = 'posts/creatcategory.html'
+    model = Category
+    fields = ('title')
+    success_url = '/blogs/'
+    def form_valid(self, form):
+        return super(CreateCategory, self).form_valid(form)
+
+
 class CreatePost(CreateView):
     template_name = 'posts/addpost.html'
     model = Post
-    model1 = Blog
     fields = ('title', 'description', 'blog')
     success_url = '/blogs/'
 
+    def get_form(self, form_class=None):
+        form = super(CreatePost, self).get_form()
+        form.fields['blog'].queryset = Post.objects.all().filter(author=self.request.user)
+        return form
+
     def form_valid(self, form):
         form.instance.author = self.request.user
-        form.instance.rate = 0
         return super(CreatePost, self).form_valid(form)
 
 

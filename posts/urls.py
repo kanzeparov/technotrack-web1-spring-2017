@@ -1,4 +1,4 @@
-from .views import BlogsList, BlogView, CreateBlog, UpdateBlog, CreatePost, UpdatePost
+from .views import BlogsList, BlogView, CreateBlog, UpdateBlog, CreatePost, UpdatePost, CreateCategory
 from django.conf.urls import url,include
 from comments.views import CommentView
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,7 @@ from views import PostView
 urlpatterns = [
     url(r'^$', BlogsList.as_view(), name="allblogs"),
     url(r'^new/$', login_required(CreateBlog.as_view()), name="createblog"),
+    url(r'^category/$', CreateCategory.as_view(), name="createcategory"),
     url(r'^posts/new$', login_required(CreatePost.as_view()), name="createpost"),
     url(r'^(?P<pk>\d+)/edit/$', UpdateBlog.as_view(), name="editblog"),
     url(r'^(?P<pk>\d+)/edit/post/$', UpdatePost.as_view(), name="editpost"),
