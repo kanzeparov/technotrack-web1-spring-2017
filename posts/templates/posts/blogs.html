@@ -1,8 +1,27 @@
 {% extends "core/base.html" %}
+{% load widget_tweaks %}
 {% block content %}
     <h2><a href={% url "main:home" %}>Main page</a> </h2>
+    <div>
+
+        <form method="get" action="{%  url "blogs:allblogs" %}">
+            {{ sortform.sort|add_class:"myinput" }}
+            {{ sortform.search.label_tag }}{{ sortform.search }}
+            <input type="submit">
+        </form>
+    </div>
+    <h3><a href="{% url "blogs:createblog" %}">Создать новый блог</a></h3>
     {% for blog in object_list %}
-        <b>{{ blog.id }}</b><a href={% url "blogs:oneblog" pk=blog.id %}>{{ blog.title }}</a><br/>
+        <b>{{ blog.id }}</b><a href={% url "blogs:oneblog" pk=blog.id %}>{{ blog.title }} Категория:{{ blog.categories }}</a><br/>
+        {% if blog.author == user %}
+            <div><a href={% url "blogs:editblog" pk=blog.id %}>Редактировать</a></div>
+        {% endif %}
         <i><div>Description: {{ blog.description }}</div></i>
     {% endfor %}
+
+
+
+
+
+
 {% endblock %}

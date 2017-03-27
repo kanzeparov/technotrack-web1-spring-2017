@@ -12,6 +12,11 @@ class Blog(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
     rate = models.IntegerField(default=0)
+    categories = models.TextField(default="No category")
+
+    def __unicode__(self):
+        return self.title
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -22,3 +27,17 @@ class Post(models.Model):
     blog = models.ForeignKey(Blog)
     rate = models.IntegerField(default=0)
 
+    def __unicode__(self):
+        return self.title
+
+class Like(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Category(models.Model):
+	title = models.CharField(max_length=50)
+
+
+        def __unicode__(self):
+            return self.title

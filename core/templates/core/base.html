@@ -7,7 +7,21 @@
     </head>
 
     <body>
+        <h1>
+            {% if user.is_anonymous %}
+            <a href="{%  url "core:login" %}">LogIn please</a><a href="{%  url "core:register" %}">Register</a>
+            {% else %}
+            {{ user.username }}
+            <a href="{% url "core:logout" %}">LogOut</a>
+            {% endif %}
+        </h1>
         {% block content %}{% endblock %}
+
+
+
+
+
+
     </body>
 
 </html>

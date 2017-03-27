@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'widget_tweaks',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'posts.apps.PostsConfig',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'core.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +55,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'core:home'
+LOGOUT_REDIRECT_URL = 'core:home'
 
 ROOT_URLCONF = 'application.urls'
 

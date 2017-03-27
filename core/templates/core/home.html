@@ -3,10 +3,13 @@
     {% block content %}
         {% include "core/list.html" with values=posts %}
         <h2><a href={% url "blogs:allblogs"%}>All blogs</a> </h2>
+        {{ user }}
 
         <div>Number of blogs - {{ blog_count|default:"no blogs"}}</div>
         <div>Number of posts - {{ post_count|default:"no posts"}}</div>
         <div>Number of comments - {{ comment_count|default:"no comments"}}</div>
+
+
 
     {% endblock %}
 

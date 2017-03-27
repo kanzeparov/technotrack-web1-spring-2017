@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+    <h2><a href={% url "blogs:allblogs" %}>All blogs</a> </h2>
+    <h3><b>{{ object.id }} BLOG</b><br/></h3>
+    <p>{{ object.title }}</p>
+    <i>Description: {{ object.description }}</i>
+
+     <form  method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+
+{% endblock %}
