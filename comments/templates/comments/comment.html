@@ -5,17 +5,18 @@
     <h2><a href={% url "blogs:oneblog" pk=object.blog.id %}>Back</a> </h2><!--Передает параметр pk как номер поста в ссылку, как сделать так, чтобы он передавал номер блога,
     а не номер поста-->
 
-    <b>{{ object.id }} post</b><br/>
+    <b>{{ post.id }} post</b><br/>
+    {{ post.description }}
         <div>
         <h2>All comments</h2>
         </div>
         <div>
         {% for comment in object.comment_set.all %}
-                <i>Comment:{{ comment.title }}</i><br/>
+                <i>Comment:{{ comment.text }} {{ comment.author }}</i><br/>
         {%  endfor %}
         </div>
 
-    <form action="{% url "blogs:createpost" %}" method="post">
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">

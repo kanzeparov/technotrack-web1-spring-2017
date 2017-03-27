@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
+from django.shortcuts import render,resolve_url
 from posts.models import Post, Blog
 from comments.models import Comment
 from django import forms
@@ -20,8 +20,9 @@ class HomePageView(TemplateView):
 
 class RegisterFormView(FormView):
     form_class = UserRegistration
-    success_url = "/"
     template_name = "core/register.html"
+    def get_success_url(self):
+        return resolve_url('core:home')
 
     def form_valid(self, form):
         form.save()

@@ -5,7 +5,10 @@
     <h3><b>{{ object.id }} BLOG</b><br/></h3>
     <p>{{ object.title }}</p>
     <i>Description: {{ object.description }}</i>
-    <i>Category: {{ object.categories }}</i>
+    <i>Category: {% for category in object.category.all %}
+        {{ category }}
+    {% endfor %}
+    </i>
 
 
     <h3><a href="{% url "blogs:createpost" %}">Создать новый post</a></h3>
@@ -15,7 +18,7 @@
         {% for post in object.post_set.all %}
             <i><a href={% url "blogs:postview" pk=post.id%}>Post {{ post.id }}</a>: {{ post.title }}</i><br/>
             <div>{% if post.comment_set.all %}
-                Last comment: <i>{{ post.comment_set.all.last.title }}</i>
+                Last comment: <i>{{ post.comment_set.all.last.text }}</i>
             {% endif %}
             </div>
 

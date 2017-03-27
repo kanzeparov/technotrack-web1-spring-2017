@@ -3,7 +3,7 @@
 {% block content %}
     <h2><a href={% url "blogs:oneblog" pk=blog.id%}>Back</a> </h2>
     <b>{{ object.id }} Post</b><br/>
-    <p>{{ object.title }}</p>
+    <p>{{ object.title }} {{ object.description }}</p>
 
         <div>
         {% for comment in object.post_set.all %}
