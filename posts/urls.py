@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)/edit/post/$', UpdatePost.as_view(), name="editpost"),
     url(r'^(?P<pk>\d+)/$', BlogView.as_view(), name="oneblog"),
     url(r'^posts/(?P<pk>\d+)$', CommentView.as_view(), name="postview"),
+    url(r'^/?sort=title&search=(?P<pk1>\d+)$', CommentView.as_view(), name="myblogs"),
     url(r'^$', CommentView.as_view(), name='createcomment'),
   #  url(r'^comments/(?P<pk>\d+)/comments$', BlogView.as_view(), name="allcomment"),
 ]

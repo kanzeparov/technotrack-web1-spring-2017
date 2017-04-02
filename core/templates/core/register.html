@@ -1,7 +1,8 @@
  {% extends "core/base.html" %}
 
 {% block content %}
- <form action="" method="post">
+ <formaction="" method="post">
+ <h2>Please sign in</h2>
       {% csrf_token %}
       <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
       {{ form.as_p }}

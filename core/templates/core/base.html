@@ -1,27 +1,72 @@
-<html>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <head>
         <title>
             {% block title %}{% endblock %}
         </title>
+
+        <link rel="stylesheet" href="{% static "core/bootstrap/dist/css/bootstrap.min.css" %}">
+        <link rel="stylesheet" href="{% static "core/base.css" %}">
     </head>
 
-    <body>
-        <h1>
-            {% if user.is_anonymous %}
-            <a href="{%  url "core:login" %}">LogIn please</a><a href="{%  url "core:register" %}">Register</a>
-            {% else %}
-            {{ user.username }}
-            <a href="{% url "core:logout" %}">LogOut</a>
-            {% endif %}
-        </h1>
-        {% block content %}{% endblock %}
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href={% url "main:home" %}>Blogs</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href={% url "main:home" %}>Main page</a></li>
+                <li><a href={% url "blogs:allblogs" %}>All blogs</a></li>
+                <li><a href="{% url "blogs:createblog" %}">Создать новый блог</a></li>
+
+            </ul>
+            {% block search %}{% endblock %}
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_anonymous %}
+                    <li class="divider"><a href="{% url "core:login" %}">LogIn please</a></li>
+                    <li><a href="{% url "core:register" %}"> Register</a></li>
+                {% else %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{ user.username }} <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url "blogs:myblogs" pk1=3 %}">Show my blogs</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="{% url "core:logout" %}"> LogOut</a></li>
+                {% endif %}
 
 
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 
+{% block content %}{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static "core/bootstrap/dist/js/bootstrap.min.js" %}"></script>
 
-
-    </body>
-
+</body>
 </html>

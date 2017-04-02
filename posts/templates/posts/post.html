@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-    <h2><a href={% url "blogs:oneblog" pk=blog.id%}>Back</a> </h2>
+
     <b>{{ object.id }} Post</b><br/>
     <p>{{ object.title }} {{ object.description }}</p>
 

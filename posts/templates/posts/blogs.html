@@ -1,27 +1,50 @@
 {% extends "core/base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-    <h2><a href={% url "main:home" %}>Main page</a> </h2>
+
     <div>
 
-        <form method="get" action="{%  url "blogs:allblogs" %}">
-            {{ sortform.sort|add_class:"myinput" }}
-            {{ sortform.search.label_tag }}{{ sortform.search }}
-            <input type="submit">
-        </form>
     </div>
     <h3><a href="{% url "blogs:createblog" %}">Создать новый блог</a></h3>
+
     {% for blog in object_list %}
-        <b>{{ blog.id }}</b><a href={% url "blogs:oneblog" pk=blog.id %}>{{ blog.title }}</a><br/>
-        {% if blog.author == user %}
-            <div><a href={% url "blogs:editblog" pk=blog.id %}>Редактировать</a></div>
-        {% endif %}
-        <i><div>Description: {{ blog.description }}</div></i>
+        <div class="border">
+
+
+            <h1>{{ blog.title }}</h1>
+        <h1> author:{{ blog.author }}</h1>
+
+                <i>
+                    <div class="col-lg-8">Description: {{ blog.description }} <a class="btn btn-primary" href={% url "blogs:oneblog" pk=blog.id %} role="button">View details>></a></a> </div>
+                </i>
+
+
+
+                <ul class="pager">
+                    <li>
+                        {% if blog.author == user %}
+                            <a href={% url "blogs:editblog" pk=blog.id %}>Редактировать</a>
+                        {% endif %}
+                    </li>
+
+                </ul>
+
+        </div>
+
+
     {% endfor %}
 
 
 
 
+{% endblock %}
+{% block search %}
+    <form class="navbar-form navbar-left" role="search" method="get" action="{% url "blogs:allblogs" %}">
+        <div class="form-group">
+            {{ sortform.sort|add_class:"myinput" }}
+            {{ sortform.search.label_tag }}{{ sortform.search }}
 
-
+        </div>
+        <button type="submit" class="btn btn-default">Отправить</button>
+    </form>
 {% endblock %}
