@@ -1,5 +1,14 @@
 .border {
     width:90%;
     position: relative;
-    border: 1px dashed blue;
+    border: 1px dashed black;
+}
+
+.borderOwn {
+    width:90%;
+    position: relative;
+    border: 5px dashed red;
+}
+.longWords {
+    overflow-wrap: break-word;
 }

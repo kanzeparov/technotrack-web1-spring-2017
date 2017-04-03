@@ -34,7 +34,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href={% url "main:home" %}>Main page</a></li>
+                <li><a href={% url "main:home" %}>Main page</a></li>
                 <li><a href={% url "blogs:allblogs" %}>All blogs</a></li>
                 <li><a href="{% url "blogs:createblog" %}">Создать новый блог</a></li>
 
@@ -50,11 +50,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{ user.username }} <b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url "blogs:myblogs" pk1=3 %}">Show my blogs</a></li>
+                             <li><a href="{% url "core:logout" %}"> LogOut</a></li>
                         </ul>
                     </li>
 
-                    <li><a href="{% url "core:logout" %}"> LogOut</a></li>
                 {% endif %}
 
 
@@ -67,6 +66,5 @@
 {% block content %}{% endblock %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="{% static "core/bootstrap/dist/js/bootstrap.min.js" %}"></script>
-
 </body>
 </html>

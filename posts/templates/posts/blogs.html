@@ -8,29 +8,30 @@
     <h3><a href="{% url "blogs:createblog" %}">Создать новый блог</a></h3>
 
     {% for blog in object_list %}
-        <div class="border">
+        {% if blog.author == user %}
+            <div class="borderOwn">
+        {% else %}
+            <div class="border">
+        {% endif %}
+    <h1>{{ blog.title }}</h1>
+    <h1> author:{{ blog.author }}</h1>
 
-
-            <h1>{{ blog.title }}</h1>
-        <h1> author:{{ blog.author }}</h1>
-
-                <i>
-                    <div class="col-lg-8">Description: {{ blog.description }} <a class="btn btn-primary" href={% url "blogs:oneblog" pk=blog.id %} role="button">View details>></a></a> </div>
-                </i>
-
-
-
-                <ul class="pager">
-                    <li>
-                        {% if blog.author == user %}
-                            <a href={% url "blogs:editblog" pk=blog.id %}>Редактировать</a>
-                        {% endif %}
-                    </li>
-
-                </ul>
-
+    <i>
+        <div class="col-lg-8">
+            <article>Description: {{ blog.description }}</article>
+            <a class="btn btn-primary" href={% url "blogs:oneblog" pk=blog.id %} role="button">View details>></a></a>
         </div>
+    </i>
 
+    <ul class="pager">
+        <li>
+            {% if blog.author == user %}
+                <a href={% url "blogs:editblog" pk=blog.id %}>Редактировать</a>
+            {% endif %}
+        </li>
+
+    </ul>
+    </div>
 
     {% endfor %}
 

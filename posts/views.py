@@ -26,8 +26,10 @@ class SortForm(forms.Form):
         ('title', u'Заголовок'),
         ('rate', u'Рейтинг'),
         ('description', u'Описание'),
+        ('author', u'Автор'),
     ), required=False)
     search = forms.CharField(required=False)
+
 
 class UpdateBlog(UpdateView):
 

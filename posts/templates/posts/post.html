@@ -3,7 +3,7 @@
 {% block content %}
 
     <b>{{ object.id }} Post</b><br/>
-    <p>{{ object.title }} {{ object.description }}</p>
+    <header>{{ object.title }} <article>{{ object.description }}</article></header>
 
         <div>
         {% for comment in object.post_set.all %}

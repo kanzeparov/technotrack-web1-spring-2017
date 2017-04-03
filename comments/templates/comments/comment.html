@@ -3,24 +3,32 @@
 {% block content %}
 
 
-    <h1><b>{{ post.id }} post</b></h1><br/>
-    <h3>{{ post.description }}</h3>
+    <h1><header>{{ post.id }} post</header></h1><br/>
+    <h4><div class="col-lg-7">{{ post.description }}</div></h4>
         <div>
-        <h2>All comments</h2>
+
         </div>
 
         <div class="col-lg-2">
+        <h2>All comments</h2>
+        <div class="well">
+        <div class="longWords">
         {% for comment in object.comment_set.all %}
                 <i>Comment:{{ comment.text }} {{ comment.author }}</i><br/>
         {%  endfor %}
         </div>
+        </div>
 
-    <div class="col-lg-5">
 
+
+    {% if user.is_anonymous %}
+        <h2>Login in to add comment</h2>
+    {% else %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit">
     </form>
+        {% endif %}
     </div>
 {% endblock %}

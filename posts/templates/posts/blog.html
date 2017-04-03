@@ -3,15 +3,17 @@
 {% block content %}
 
     <h3><b><h1>BLOG</h1></b><br/></h3>
-    <p><h1>{{ object.title }}</h1></p>
+    <header><h1>{{ object.title }}</h1></header>
     <div class="col-lg-5">
-    <i>Description: {{ object.description }}</i>
+    <article><i>Description: {{ object.description }}</i></article>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5" >
+    <div class="well">
     <i>Category: {% for category in object.category.all %}
         {{ category }}
     {% endfor %}
     </i>
+    </div>
 
 
     <h3><a href="{% url "blogs:createpost" %}">Создать новый post</a></h3>
@@ -20,6 +22,7 @@
         <div class="col-lg-10">
         <h1>Posts</h1>
         {% for post in object.post_set.all %}
+            <div class="panel panel-primary">
             <i><a href={% url "blogs:postview" pk=post.id%}>Post {{ post.id }}</a>: {{ post.title }}</i><br/>
             <div>{% if post.comment_set.all %}
                 Last comment: <i>{{ post.comment_set.all.last.text }}</i>
@@ -30,6 +33,7 @@
                 <div> <a href={% url "blogs:editpost" pk=post.id %}>Редактировать Post</a></div>
             {% endif %}
             <br>
+            </div>
         {%  endfor %}
         </div>
     {% endif %}

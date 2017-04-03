@@ -1,27 +1,30 @@
 {% extends "core/base.html" %}
 
-    {% block content %}
-        {% include "core/list.html" with values=posts %}
-        <div class="jumbotron">
-            <div><h2>Number of blogs - {{ blog_count|default:"no blogs"}}</h2>
-                <p>
-                    This is number of blogs
-                </p>
+{% block content %}
+    {% include "core/list.html" with values=posts %}
+    <div class="jumbotron">
+        <div class="panel panel-primary"><h4>Number of blogs - <span
+                class="badge">{{ blog_count|default:"no blogs" }}</span></h4>
+            <header>
+                This is number of blogs
+            </header>
             <p>
                 <a class="btn btn-lg btn-primary" href="{% url "blogs:allblogs" %}" role="button">All blogs</a>
             </p></div>
-            <div><h2>Number of posts - {{ post_count|default:"no posts"}}</h2>
-            <p>This is number of posts in blogs</p></div>
-            <div><h2>Number of comments - {{ comment_count|default:"no comments"}}</h2>
+        <div class="panel panel-primary"><h4>Number of posts -
+            <span class="badge">{{ post_count|default:"no posts" }}</span></h4>
+            <header>This is number of posts in blogs</header></div>
+        <div class="panel panel-primary"><h4>Number of comments - <span
+                class="badge">{{ comment_count|default:"no comments" }}</span></h4>
 
-                <p>This is number of comments in posts</p>
-            </div>
+            <header>This is number of comments in posts</header>
         </div>
+    </div>
 
 
 
 
 
-    {% endblock %}
+{% endblock %}
 
-    {% block title %}Main page{% endblock %}
+{% block title %}Main page{% endblock %}
